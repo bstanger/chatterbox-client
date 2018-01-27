@@ -8,8 +8,8 @@
     <!-- dependencies -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
     <script src="bower_components/underscore/underscore.js"></script>
-    <script type="text/javascript" src="bower_components/validator-js/validator.min.js"></script>
-    <script>
+<!--     <script src="bower_components/DOMPurify/src/purify.js"></script>
+ -->    <script>
       // YOU DO NOT NEED TO EDIT THIS CODE
       if (!/(&|\?)username=/.test(window.location.search)) {
         var newSearch = window.location.search;
@@ -30,6 +30,9 @@
       <!-- <form> -->
         <input type="text" name="message" value="Enter your message here" class="input-message">
         <input class="input-message_btn" type="submit" value="Submit">
+        <select name="chatroom-dropdown" class="chatroom-dropdown">
+          <option value="create">Start a room</option>
+        </select>
 <!--       </form>
  -->    </div>
     <div id="chats"></div>
