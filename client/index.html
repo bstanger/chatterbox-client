@@ -27,12 +27,13 @@
   <body>
     <div id="main">
       <h1>chatterbox</h1>
+        <select name="chatroom-dropdown" class="chatroom-dropdown">
+          <option selected="true" disabled="disabled">Choose a room</option>
+          <option value="create">Start a new room</option>
+        </select>
       <!-- <form> -->
         <input type="text" name="message" value="Enter your message here" class="input-message">
         <input class="input-message_btn" type="submit" value="Submit">
-        <select name="chatroom-dropdown" class="chatroom-dropdown">
-          <option value="create">Start a room</option>
-        </select>
 <!--       </form>
  -->    </div>
     <div id="chats"></div>

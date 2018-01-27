@@ -52,11 +52,17 @@ form {
     margin-bottom: 20px;
 }
 
-form input[type=text] {
+form input[type=text],
+input {
     margin-right: 10px;
     width: 70%;
     font-size: 12px;
     padding: 5px;
+}
+
+.chatroom-dropdown {
+    display: block;
+    margin-bottom: 14px;
 }
 
 .chat {
