@@ -7,6 +7,8 @@
 
     <!-- dependencies -->
     <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/underscore/underscore.js"></script>
+    <script type="text/javascript" src="bower_components/validator-js/validator.min.js"></script>
     <script>
       // YOU DO NOT NEED TO EDIT THIS CODE
       if (!/(&|\?)username=/.test(window.location.search)) {
@@ -25,8 +27,11 @@
   <body>
     <div id="main">
       <h1>chatterbox</h1>
-      <!-- Your HTML goes here! -->
-    </div>
+      <!-- <form> -->
+        <input type="text" name="message" value="Enter your message here" class="input-message">
+        <input class="input-message_btn" type="submit" value="Submit">
+<!--       </form>
+ -->    </div>
     <div id="chats"></div>
   </body>
 </html>
