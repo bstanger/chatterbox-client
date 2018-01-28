@@ -3,11 +3,13 @@ $(document).ready(function () {
 
   $('.input-message_btn').on('click', function() {
     var message = $('.input-message').val();
-    makeApp.prototype.createMessageObj(message);
+    makeApp.prototype.handleSubmit(message);
+    // makeApp.prototype.createMessageObj(message);
   });
 
   $('.chatroom-dropdown').on('change', function(event) {
-    makeApp.prototype.filter(event);
+    let roomName = event.currentTarget.value;
+    makeApp.prototype.renderRoom(roomName);
   });
 });
 
@@ -78,7 +80,7 @@ makeApp.prototype.renderMessage = chat => {
 };
 
 makeApp.prototype.handleUsernameClick = (event) => {
-  var userName = $(event.currentTarget).data('username');
+  var userName = (event && $(event.currentTarget).data('username')) || 'username';
   if(makeApp.friendsList.includes(userName)) {
     var indexOfFriend = makeApp.friendsList.indexOf(userName);
     makeApp.friendsList.splice(indexOfFriend, 1);
@@ -89,6 +91,9 @@ makeApp.prototype.handleUsernameClick = (event) => {
   }
 };
 
+makeApp.prototype.handleSubmit = message => {
+  makeApp.prototype.createMessageObj(message);
+};
 
 makeApp.prototype.createMessageObj = message => {
   var messageObj = {};
@@ -116,20 +121,15 @@ makeApp.prototype.clearMessages = () => {
 };
 
 makeApp.prototype.triggerRender = () => {
-  let inputChatRoom = $('.new-Chat-Room').val();
-  makeApp.prototype.renderRoom(inputChatRoom);
-};
-
-makeApp.prototype.renderRoom = (newChatroomName) => {
+  let newChatroomName = $('.new-Chat-Room').val();
   let $option = $(`<option value="${newChatroomName}">${newChatroomName}</option>`);
   $('.chatroom-dropdown').append($option);
   $('.new-Chat-Room, .submit-Chat-Room').remove();
   $('.chatroom-dropdown').show();
 };
 
-makeApp.prototype.filter = event => {
-  let roomName = event.currentTarget.value;
-  if (roomName === 'create') {
+makeApp.prototype.renderRoom = (chatroomName) => {
+  if (chatroomName === 'create') {
     $('.chatroom-dropdown').hide();
     var createChatRoom = $('<input class="new-Chat-Room"><button class="submit-Chat-Room">Submit</button>');
     $('.chatroom-dropdown').after(createChatRoom);
@@ -137,7 +137,7 @@ makeApp.prototype.filter = event => {
 
   } else {
     makeApp.prototype.clearMessages();
-    let roomMessages = makeApp.chatsByRoom[roomName];
+    let roomMessages = makeApp.chatsByRoom[chatroomName];
     console.log(roomMessages);
     if (roomMessages) {
       roomMessages.forEach(function(message) {
