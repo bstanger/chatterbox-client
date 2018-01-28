@@ -3,9 +3,6 @@ describe('chatterbox', function() {
   var app;
   beforeEach(function () {
     app = new makeApp();
-    // app.chatsByRoom = {};
-    // app.chatsbyRoom['testing'] = [];
-  
   });
   it('should parse correctly and have an object named `app`', function() {
     expect(app).to.be.an('object');

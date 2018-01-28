@@ -21,9 +21,9 @@ var makeApp = function() {
 
 makeApp.prototype.init = () => {
   makeApp.prototype.fetch(makeApp.prototype.populateDropDown);
-  // setInterval(function () {
-  //   makeApp.prototype.fetch.call(this);
-  // }, 60000);
+  setInterval(function () {
+    makeApp.prototype.fetch.call(this);
+  }, 60000);
 };
 
 makeApp.prototype.fetch = cb => {
@@ -72,8 +72,8 @@ makeApp.prototype.renderMessage = chat => {
   text = _.escape(text);
   let $message = $(`<div class="message"></div>`);
   $message.append($(`<h3 class="message_username" data-objId="${objectId}" data-username="${username}">${username}</h3>`));
-  $('.message_username').after($(`<div class="message_text">${text}</div>`));
   $('#chats').prepend($message);
+  $('.message_username[data-objId="' + objectId + '"]').after($(`<div class="message_text">${text}</div>`));
   $('.message_username[data-objId="' + objectId + '"]').on('click', function () {
     makeApp.prototype.handleUsernameClick(event);
   });
@@ -138,7 +138,6 @@ makeApp.prototype.renderRoom = (chatroomName) => {
   } else {
     makeApp.prototype.clearMessages();
     let roomMessages = makeApp.chatsByRoom[chatroomName];
-    console.log(roomMessages);
     if (roomMessages) {
       roomMessages.forEach(function(message) {
         makeApp.prototype.renderMessage(message);
