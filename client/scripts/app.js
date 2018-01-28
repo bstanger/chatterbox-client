@@ -13,6 +13,7 @@ $(document).ready(function () {
 
 var makeApp = function() {
   this.init();
+  makeApp.friendsList = [];
   this.server = 'http://parse.sfm6.hackreactor.com/chatterbox/classes/messages';
 };
 
@@ -64,14 +65,30 @@ makeApp.prototype.populateDropDown = () => {
 
 makeApp.prototype.renderMessage = chat => {
   console.log(chat);
-  var {username, text} = chat;
+  var {objectId, username, text} = chat;
   username = _.escape(username);
   text = _.escape(text);
-  let $message = $(`<div class ="message"></div>`);
-  $message.append($(`<h3 class="message_username">${username}</h3>`));
-  $('.message_username').append($(`<div class="message_text">${text}</div>`));
+  let $message = $(`<div class="message"></div>`);
+  $message.append($(`<h3 class="message_username" data-objId="${objectId}" data-username="${username}">${username}</h3>`));
+  $('.message_username').after($(`<div class="message_text">${text}</div>`));
   $('#chats').prepend($message);
+  $('.message_username[data-objId="' + objectId + '"]').on('click', function () {
+    makeApp.prototype.handleUsernameClick(event);
+  });
 };
+
+makeApp.prototype.handleUsernameClick = (event) => {
+  var userName = $(event.currentTarget).data('username');
+  if(makeApp.friendsList.includes(userName)) {
+    var indexOfFriend = makeApp.friendsList.indexOf(userName);
+    makeApp.friendsList.splice(indexOfFriend, 1);
+    $('.message_username[data-username="' + userName + '"]').removeClass("friend");
+  } else {
+    makeApp.friendsList.push(userName);
+    $('.message_username[data-username="' + userName + '"]').addClass("friend");
+  }
+};
+
 
 makeApp.prototype.createMessageObj = message => {
   var messageObj = {};
